@@ -7,6 +7,7 @@ public class SceneLoaderSCRIPT : MonoBehaviour
     private void Awake()
     {
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     public void LoadScene(int sceneIndex)
