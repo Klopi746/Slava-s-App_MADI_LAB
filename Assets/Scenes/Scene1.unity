@@ -168,8 +168,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ccb251ab5f99e45468a4e050ed4f6f07, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateScale: 1
-  minAnchoredPosY: -200
+  rotateScale: 2
+  minAnchoredPosY: -50
   maxAnchoredPosY: 200
 --- !u!114 &389966744
 MonoBehaviour:
