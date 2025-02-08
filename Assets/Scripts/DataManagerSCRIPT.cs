@@ -26,8 +26,9 @@ public class DataManagerSCRIPT : MonoBehaviour
 
     public void SubmitText(string prefKey, string prefVal)
     {
-        Debug.Log("Saved " + prefVal + " to " + prefKey);
-        PlayerPrefs.SetString(prefKey, prefVal);
+        string newPrefVal = prefVal.Replace(',', '.');
+        Debug.Log("Saved " + newPrefVal + " to " + prefKey);
+        PlayerPrefs.SetString(prefKey, newPrefVal);
         PlayerPrefs.Save();
     }
 }
