@@ -1,2 +1,2 @@
 # Slava-s-App
-A small virtual implementation of soma educational labs
+A virtual implementation of some MADI educational labs
