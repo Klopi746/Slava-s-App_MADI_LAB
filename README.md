@@ -1,2 +1,2 @@
-# Slava-s-App
-A virtual implementation of some MADI educational labs
+# MADI land-use laboratory
+Virtual implementation of laboratory work on the subject of land use for MADI University
