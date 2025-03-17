@@ -1,4 +1,4 @@
 # MADI land-use laboratory
 Virtual implementation of laboratory work on the subject of land use for MADI University
 
-Maked on UNITY.
+Made on UNITY.
