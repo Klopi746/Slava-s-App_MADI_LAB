@@ -3,20 +3,25 @@ using System.Globalization;
 using System.Linq;
 using DG.Tweening;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class Scene4ManagerSCRIPT : MonoBehaviour
 {
     [SerializeField] Image gruzoff;
+
+    [SerializeField] Image podaviteliZemlya;
+
+    private Sprite gruzoffwalk;
     [SerializeField] Sprite gruzoffSvalka;
-    [SerializeField] Image plants;
+    [SerializeField] Image[] plants;
     [SerializeField] Sprite plantsBad;
     [SerializeField] Sprite plantsGood;
 
     [SerializeField] Button goodButt;
     [SerializeField] Button badButt;
+
+    [SerializeField] Image[] zemlya;
 
     private bool resultWasShown = false;
 
@@ -35,24 +40,83 @@ public class Scene4ManagerSCRIPT : MonoBehaviour
     }
     private IEnumerator ShowResultCoroutine(bool result)
     {
-        Tween gruzoffTween = gruzoff.transform.DOMoveX(900, 3f);
+        gruzoffwalk = gruzoff.sprite;
+
+        Tween gruzoffTween = gruzoff.transform.DOMoveX(300, 3f);
         yield return gruzoffTween.WaitForCompletion();
         gruzoff.sprite = gruzoffSvalka;
+        gruzoff.transform.DOMoveY(355, 0f);
+        zemlya[0].DOFade(1, 1);
+        yield return new WaitForSeconds(1f);
+
+        gruzoff.sprite = gruzoffwalk;
+        gruzoff.transform.DOMoveY(320, 0f);
+        gruzoffTween = gruzoff.transform.DOMoveX(600, 3f);
+        yield return gruzoffTween.WaitForCompletion();
+        gruzoff.sprite = gruzoffSvalka;
+        gruzoff.transform.DOMoveY(355, 0f);
+        zemlya[1].DOFade(1, 1);
+        yield return new WaitForSeconds(1f);
+
+        gruzoff.sprite = gruzoffwalk;
+        gruzoff.transform.DOMoveY(320, 0f);
+        gruzoffTween = gruzoff.transform.DOMoveX(900, 3f);
+        yield return gruzoffTween.WaitForCompletion();
+        gruzoff.sprite = gruzoffSvalka;
+        gruzoff.transform.DOMoveY(355, 0f);
+        zemlya[2].DOFade(1, 1);
+        yield return new WaitForSeconds(1f);
+
+        gruzoff.sprite = gruzoffwalk;
+        gruzoff.transform.DOMoveY(320, 0f);
+        gruzoffTween = gruzoff.transform.DOMoveX(1200, 3f);
+        yield return gruzoffTween.WaitForCompletion();
+
+        Tween podavitelTween = podaviteliZemlya.transform.DOMoveX(300, 3f);
+        yield return new WaitForSeconds(1.5f);
+        zemlya[0].transform.DOScaleY(0.5f, 1);
+        yield return podavitelTween.WaitForCompletion();
+        yield return new WaitForSeconds(1f);
+
+        podavitelTween = podaviteliZemlya.transform.DOMoveX(600, 2f);
+        yield return new WaitForSeconds(1f);
+        zemlya[1].transform.DOScaleY(0.5f, 1);
+        yield return podavitelTween.WaitForCompletion();
+        yield return new WaitForSeconds(1f);
+
+        podavitelTween = podaviteliZemlya.transform.DOMoveX(900, 2f);
+        yield return new WaitForSeconds(1f);
+        zemlya[2].transform.DOScaleY(0.5f, 1);
+        yield return podavitelTween.WaitForCompletion();
+        yield return new WaitForSeconds(1f);
+
+        podavitelTween = podaviteliZemlya.transform.DOMoveX(1200, 2f);
+        yield return podavitelTween.WaitForCompletion();
 
         if (result == true)
         {
-            plants.sprite = plantsGood;
             PlayerPrefs.SetFloat("minV", resultsV[minIndex]);
             PlayerPrefs.SetFloat("minM", resultsM[minIndex]);
             PlayerPrefs.SetFloat("minH", resultsH[minIndex]);
+
+            plants[0].sprite = plantsGood;
+            plants[1].sprite = plantsGood;
+            plants[2].sprite = plantsGood;
         }
         else
         {
-            plants.sprite = plantsBad;
+            plants[0].sprite = plantsBad;
+            plants[1].sprite = plantsBad;
+            plants[2].sprite = plantsBad;
         }
 
-        Tween plantsTween = plants.DOFade(1, 1);
-        yield return plantsTween.WaitForCompletion();
+        Tween plantsTween = null;
+        foreach (var plant in plants)
+        {
+            plantsTween = plant.DOFade(1, 1);
+        }
+        if (plantsTween != null)
+            yield return plantsTween.WaitForCompletion();
 
         if (result == true) goodButt.interactable = true;
         else badButt.interactable = true;
